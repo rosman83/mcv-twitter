@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   }
   const generateImg = async (evt: any) => {
       evt.preventDefault();
-      if (Number(imgid) > 0 && Number(imgid) <= 5555 ) {
+      if (Number(imgid) > 0 && Number(imgid) <= 10000 ) {
         setLoading(true);
         var Fcolor = '#0000'
         axios.get(`https://api.opensea.io/api/v1/asset/${contractURL}/${imgid}`).then( async (imageone) => {
@@ -87,7 +87,7 @@ const Home: NextPage = () => {
         
       } else {
         return alert(
-          "Check to make sure crop method is selected, and valid Piece Number (ex. 141) is selected less than 5,555."
+          "Please make sure you entered valid Piece Number (ex. 141)  less than 10001."
         );
       }
     };
