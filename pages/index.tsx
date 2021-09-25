@@ -10,6 +10,7 @@ const Home: NextPage = () => {
   const [finalimg, setFinalimg] = useState("");
   const [finished, setFinished] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [method, setMethod] = useState("banner");
   const contractURL = '0xdd467a6c8ae2b39825a452e06b4fa82f73d4253d';
   async function handleReset() {
     setImgid("");
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
   }
   const generateImg = async (evt: any) => {
       evt.preventDefault();
-      if (Number(imgid) > 0 && Number(imgid) <= 10000 ) {
+      if (Number(imgid) > 0 && Number(imgid) <= 10000 && method != '') {
         setLoading(true);
         var Fcolor = '#0000'
         axios.get(`https://api.opensea.io/api/v1/asset/${contractURL}/${imgid}`).then( async (imageone) => {
@@ -63,6 +64,7 @@ const Home: NextPage = () => {
               let data = {
                 imageonedata: imageone.data.image_url,
                 imageonecol: Fcolor,
+                method: method,
               };
               await axios
                 .post("/api/gen", data, {
@@ -91,6 +93,11 @@ const Home: NextPage = () => {
         );
       }
     };
+
+    let handleChange = (event) => {
+    setMethod(event.target.value);
+  };
+
   return (
 <div>
       <Head>
@@ -151,6 +158,25 @@ const Home: NextPage = () => {
               className="flex flex-col gap-2 justify-center items-center"
             >
               <div className="grid grid-cols-1 w-full  gap-2 mb-4">
+                 <label className="flex flex-col block text-left w-full h-full">
+                  <span
+                     className="text-gray-200 text-opacity-60 text-sm"
+                    hidden={loading}
+                  >
+                    Image Type
+                  </span>
+                  <select
+                    name="methods"
+                    hidden={loading}
+                    value={method}
+                    onChange={handleChange}
+                    className="form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  >
+                    <option value="banner">Twitter Banner</option>
+                    <option value="regwall">Wallpaper (1920x1080)</option>
+                    <option value="bigwall">Wallpaper (2560x1440)</option>
+                  </select>
+                </label>
                 <label className="flex flex-col block text-left w-full h-full">
                   <span
                     className="text-gray-200 text-opacity-60 text-sm"
