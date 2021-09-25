@@ -31,6 +31,7 @@ export default async function handler(
             kernel: sharp.kernel.nearest,
             fit: 'contain',
           })
+          .flop()
           .toBuffer()
           .then((nimgBuffer) => {
              sharp({
@@ -41,13 +42,13 @@ export default async function handler(
                   background: req.body.imageonecol
                 }
               })
-              .composite([{ input: nimgBuffer, blend: 'atop', top: 0, 'left': 0}])
+              .composite([{ input: nimgBuffer, blend: 'atop', top: 0, 'left': 900}])
               .sharpen()
               .png()
               .toBuffer()
               .then((fdata) => {
                     sharp(fdata)
-                    .composite([{ input: nnimgBuffer, blend: 'atop', top: 50, left: 1200, right: 100}])
+                    .composite([{ input: nnimgBuffer, blend: 'atop', top: 50, left: 100, right: 100}])
                     .sharpen()
                     .png()
                     .toBuffer()
