@@ -114,7 +114,7 @@ const Home: NextPage = () => {
                   MCV Twitter Banners, with support for multiple voyagers!
                 </p>
                 <p className="text-sm">
-                  <a href='https://opensea.io/InvaderETH' className='text-green-600'>Donate spare 🐱's here</a> and we will train them to program cool tools like this.
+                  <a href='https://opensea.io/InvaderETH' className='text-green-600'>Donate a spare 🪐🐱 here</a> and we will train them to program cool tools like this.
                 </p>
                 </div>
            
@@ -127,7 +127,7 @@ const Home: NextPage = () => {
             )}
            {finished ? (
              <div className='flex gap-6 flex-col'>
-               <img className='' src={finalimg}/>
+               <img className='' alt='finalimage' src={finalimg}/>
                <div className="flex flex-row gap-4">
                             <a download={String(`nightkids_${imgid}.jpg`)} href={finalimg}>
 
